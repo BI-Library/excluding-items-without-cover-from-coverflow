@@ -1,7 +1,7 @@
 # About
 Tutorial of how to exclude items that do not have a cover from the Koha [Coverflow](https://github.com/bywatersolutions/koha-plugin-coverflow) plugin
 
-#TL;DR
+# TL;DR
 The Coverflow plugin created by ByWater Solutions is a great extension of the Koha ILS, but it uses Amazon to retrieve the cover images used in the plugin and if there are none available, it uses a placeholder 'No image available' cover.
 
 We wanted to exclude these and wrote a line of JQuery to do so. However, when we placed the JQuery in OPACUserJS, nothing happened. Troubleshooting revealed that this was because the Coverflow plugin was being loaded after the OPACUserJS codeblock and therefore not being affected by our code.
@@ -16,14 +16,14 @@ The code we use is pretty straightforward. We select all images that have an `sr
 
 ## Step 2 - Where to put the code
 
-Normally we could include the above code in Home > Administration > System preferences > OPACUserJS, but because the Coverflow plugin is last thing loaded, we must include our code directly in the Coverflow code, specifically in the file `opacuserjs.tt`, which means we must find where the file lives.
+Normally we could include the above code in Home > Administration > System preferences > OPACUserJS, but because the Coverflow plugin is the last thing loaded, we must include our code directly in the Coverflow plugin, specifically in the file `opacuserjs.tt`, which means we must find where the file lives.
 
 If the Koha instance was installed via a Debian package, it should be located at: 
 `/var/lib/koha/[instance name]/plugins/Koha/Plugin/Com/ByWaterSolutions/CoverFlow/opacuserjs.tt`
 
 ## Step 3 - Inserting the code
 
-With opacuserjs.tt, find the reference to 'NoImage.png'. It should be around line 10.
+Within opacuserjs.tt, find the reference to 'NoImage.png'. It should be around line 10.
 
 Now simply create a new line and insert the code from **Step 1**.
 
@@ -65,5 +65,8 @@ $(document).ready(function () {
     [% END %]
 });
 ```
+
+## Step 4 - Confirming code injection
+In order to immediately check whether our code injection worked, we visited the Coverflow plugin configuration page (Home > Tools > Plugins > CoverFlow plugin > Actions > Configure), pressed Save, and then did a hard refresh on the page.
 
 Note that this code will likely be overwritten by any future updates to the Coverflow plugin and will need to be reinserted.
