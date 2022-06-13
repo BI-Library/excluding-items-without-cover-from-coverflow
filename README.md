@@ -19,7 +19,7 @@ The code we use is pretty straightforward. We select all images that have an `sr
 Normally we could include the above code in Home > Administration > System preferences > OPACUserJS, but because the Coverflow plugin is last thing loaded, we must include our code directly in the Coverflow code, specifically in the file `opacuserjs.tt`, which means we must find where the file lives.
 
 If the Koha instance was installed via a Debian package, it should be located at: 
-`/var/[instance name]/plugins/Koha/Plugin/Com/ByWaterSolutions/CoverFlow/opacuserjs.tt`
+`/var/lib/koha/[instance name]/plugins/Koha/Plugin/Com/ByWaterSolutions/CoverFlow/opacuserjs.tt`
 
 ## Step 3 - Inserting the code
 
